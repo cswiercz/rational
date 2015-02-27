@@ -21,5 +21,8 @@ int main(void)
   cout << (r >= s) << endl;
   cout << (r == r) << endl;
 
+  cout << ((1 * r) == r) << endl;
+  cout << ((r * 1) == r) << endl;
+
   return 0;
 }
