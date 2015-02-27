@@ -1,11 +1,12 @@
-#ifndef RATIONAL_HPP
-#define RATIONAL_HPP
+#ifndef RATIONAL_COMPARABLE_HPP
+#define RATIONAL_COMPARABLE_HPP
 
 #include <string>
+#include "comparable.hpp"
 
 // default template type
 template <class T>
-class Rational
+class Rational : public Comparable< Rational<T> > // TODO: look this up
 {
  protected:
 
@@ -15,9 +16,10 @@ class Rational
  public:
 
   Rational() : numer(0), denom(1) { };
-  // ampersand: prevents null ptr or uninitialized input
   // const:     no "middle man" copy
-  // getting a pointer but within the body you can treat it as a value
+  // ampersand: prevents null ptr or uninitialized input
+  //            getting a pointer but within the body you can treat
+  //            it as a value
   // (i.e. no dereferencing necessary)
   //
   // TODO: look at difference between "*" and "&" in this case
@@ -25,13 +27,12 @@ class Rational
   Rational(const T& _numer) : numer(_numer), denom(1) { };
   Rational(const T& _numer, const T& _denom);
 
+  T Numer() const { return numer; }
+  T Denom() const { return denom; }
+
   // Operators
-  Rational<T> operator* (const Rational<T>& q) const;
-  inline bool operator== (const Rational<T>& q) const;
   inline bool operator< (const Rational<T>& q) const;
   inline bool operator> (const Rational<T>& q) const;
-  inline bool operator<= (const Rational<T>& q) const;
-  inline bool operator>= (const Rational<T>& q) const;
 
   std::string print(void) const;   // const disallows modification of the obj
 };
@@ -54,16 +55,24 @@ denom(_denom)
 // Operators
 //
 template <class T>
-Rational<T> Rational<T>::operator* (const Rational<T>& q) const
+Rational<T> operator* (const Rational<T>& p, const Rational<T>& q)
 {
-  Rational<T> val = {numer*q.numer, denom*q.denom};
+  Rational<T> val = {p.Numer() * q.Numer(), p.Denom() * q.Denom()};
   return val;
 }
 
 template <class T>
-inline bool Rational<T>::operator== (const Rational<T>& q) const
+Rational<T> operator* (const Rational<T>& p, const T& q)
 {
-  return (numer == q.numer) && (denom == q.denom);
+  Rational<T> val = {p.Numer() * q, p.Denom()};
+  return val;
+}
+
+template <class T>
+Rational<T> operator* (const T& p, const Rational<T>& q)
+{
+  Rational<T> val = {p * q.Numer(), q.Denom()};
+  return val;
 }
 
 template <class T>
@@ -79,18 +88,6 @@ inline bool Rational<T>::operator> (const Rational<T>& q) const
 }
 
 template <class T>
-inline bool Rational<T>::operator<= (const Rational<T>& q) const
-{
-  return !(*this > q);
-}
-
-template <class T>
-inline bool Rational<T>::operator>= (const Rational<T>& q) const
-{
-  return !(*this < q);
-}
-
-template <class T>
 std::string Rational<T>::print(void) const
 {
   std::string s = std::to_string(numer) + '/' + std::to_string(denom);
@@ -98,4 +95,4 @@ std::string Rational<T>::print(void) const
 }
 
 
-#endif // #ifndef RATIONAL_HPP
+#endif // #ifndef RATIONAL_COMPERABLE_HPP

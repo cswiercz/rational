@@ -1,5 +1,5 @@
 #include <iostream>
-#include "rational_comparable.hpp"
+#include "rational.hpp"
 
 using std::cout;
 using std::endl;
