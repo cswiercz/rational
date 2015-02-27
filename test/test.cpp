@@ -14,6 +14,7 @@ int main(void)
   cout << s.print() << endl;
   cout << t.print() << endl;
 
+  cout << endl << "Test Comparison:" << endl;
   cout << (r < s) << endl;
   cout << (r > s) << endl;
   cout << (r == s) << endl;
@@ -21,8 +22,14 @@ int main(void)
   cout << (r >= s) << endl;
   cout << (r == r) << endl;
 
+  cout << endl << "Test Multiplication:" << endl;
   cout << ((1 * r) == r) << endl;
   cout << ((r * 1) == r) << endl;
+
+  cout << endl << "Test Addition:" << endl;
+  cout << (r + s).print() << endl;
+  cout << (r + 1).print() << endl;
+  cout << (1 + r).print() << endl;
 
   return 0;
 }

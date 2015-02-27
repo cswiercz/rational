@@ -27,8 +27,8 @@ class Rational : public Comparable< Rational<T> > // TODO: look this up
   Rational(const T& _numer) : numer(_numer), denom(1) { };
   Rational(const T& _numer, const T& _denom);
 
-  T Numer() const { return numer; }
-  T Denom() const { return denom; }
+  inline T Numer() const { return numer; }
+  inline T Denom() const { return denom; }
 
   // Operators
   inline bool operator< (const Rational<T>& q) const;
@@ -72,6 +72,28 @@ template <class T>
 Rational<T> operator* (const T& p, const Rational<T>& q)
 {
   Rational<T> val = {p * q.Numer(), q.Denom()};
+  return val;
+}
+
+template <class T>
+Rational<T> operator+ (const Rational<T>& p, const Rational<T>& q)
+{
+  Rational<T> val = {p.Numer() * q.Denom() + p.Denom() * q.Numer(),
+                     p.Denom() * q.Denom()};
+  return val;
+}
+
+template <class T>
+Rational<T> operator+ (const Rational<T>& p, const T& q)
+{
+  Rational<T> val = {p.Numer() + q * p.Denom(), p.Denom()};
+  return val;
+}
+
+template <class T>
+Rational<T> operator+ (const T& p, const Rational<T>& q)
+{
+  Rational<T> val = {q.Numer() + p * q.Denom(), q.Denom()};
   return val;
 }
 
