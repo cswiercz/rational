@@ -31,5 +31,8 @@ int main(void)
   cout << (r + 1 == Rational<int>(3,2)) << endl;
   cout << (1 + r == Rational<int>(3,2)) << endl;
 
+  cout << endl << "Test Coercion:" << endl;
+  cout << ((double)r == 0.5) << endl;
+  cout << ((double)s == 0.6) << endl;
   return 0;
 }

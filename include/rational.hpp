@@ -33,8 +33,9 @@ class Rational : public Comparable< Rational<T> > // TODO: look this up
   // Operators
   inline bool operator< (const Rational<T>& q) const;
   inline bool operator> (const Rational<T>& q) const;
+  operator double();
 
-  std::string print(void) const;   // const disallows modification of the obj
+  std::string print(void) const;
 };
 
 
@@ -54,6 +55,17 @@ denom(_denom)
 //
 // Operators
 //
+
+// double is within the scope of Rational (see above)
+//
+// don't need to specify return type of type conversion
+// TODO: this can be generalized over the type. (float, double, long double)
+template <class T>
+Rational<T>::operator double()
+{
+  return static_cast<double>(numer) / static_cast<double>(denom);
+}
+
 template <class T>
 Rational<T> operator* (const Rational<T>& p, const Rational<T>& q)
 {
