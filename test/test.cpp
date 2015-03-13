@@ -1,5 +1,6 @@
 #include <iostream>
 #include "rational.hpp"
+#include "arithmetic.hpp"
 
 using std::cout;
 using std::endl;
@@ -34,5 +35,12 @@ int main(void)
   cout << endl << "Test Coercion:" << endl;
   cout << ((double)r == 0.5) << endl;
   cout << ((double)s == 0.6) << endl;
+
+  cout << endl << "Test gcd:" << endl;
+  cout << (gcd(10,2) == 2) << endl;
+  cout << (gcd(10,-2) == 2) << endl;
+  cout << (gcd(-10,2) == 2) << endl;
+  cout << (gcd(-10,-2) == 2) << endl;
+
   return 0;
 }

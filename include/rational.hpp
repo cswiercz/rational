@@ -1,8 +1,9 @@
-#ifndef RATIONAL_COMPARABLE_HPP
-#define RATIONAL_COMPARABLE_HPP
+#ifndef RATIONAL_HPP
+#define RATIONAL_HPP
 
 #include <string>
 #include "comparable.hpp"
+#include "arithmetic.hpp"
 
 // default template type
 template <class T>
@@ -48,9 +49,9 @@ Rational<T>::Rational(const T& _numer, const T& _denom)
 numer(_numer),
 denom(_denom)
 {
-  // TODO: reduce to simplest terms
+  // use Euclidean algorithm to reduce to simplest terms
+  T r;
 }
-
 
 //
 // Operators
@@ -129,4 +130,4 @@ std::string Rational<T>::print(void) const
 }
 
 
-#endif // #ifndef RATIONAL_COMPERABLE_HPP
+#endif // #ifndef RATIONAL_HPP
