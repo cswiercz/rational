@@ -2,6 +2,31 @@
 #define RATIONAL_ARITHMETIC_HPP
 
 /*
+  exponentiation by squaring - generic
+
+  As long as the type T implements * and has an integer constructor
+  then this will work.
+*/
+template <class T>
+T expt(const T& x, unsigned int k)
+{
+  T y = 1;
+  while (k > 0)
+  {
+    if (k % 2 == 0) {
+      y = y * y;
+      k /= 2;
+    } else {
+      y = y * x;
+      k -= 1;
+    }
+  }
+
+  return y;
+}
+
+
+/*
   gcd - generic
 
   As long as the type T implements "%" and "!= 0" then
